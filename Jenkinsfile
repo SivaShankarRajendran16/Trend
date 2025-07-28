@@ -7,15 +7,18 @@ pipeline {
   }
 
   stages {
-    stage('Clone') {
+    stage('Checkout Code') {
       steps {
-        git url: 'https://github.com/SivaShankarRajendran16/Trend.git'
+        git branch: 'main', url: 'https://github.com/SivaShankarRajendran16/Trend.git'
       }
     }
 
     stage('Dockerize') {
       steps {
-        sh 'docker build -t ${imageName}:${version} .'
+        script {
+          echo "Building Docker image..."
+          sh 'docker build -t $imageName:$version .'
+        }
       }
     }
 
@@ -26,13 +29,16 @@ pipeline {
           usernameVariable: 'DOCKER_USER',
           passwordVariable: 'DOCKER_PASS'
         )]) {
-          echo 'Logging in to Docker Hub...'
-          sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+          script {
+            echo "Logging in to Docker Hub..."
+            sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
 
-          echo 'Pushing image to Docker Hub...'
-          sh 'docker push ${imageName}:${version}'
+            echo "Pushing image to Docker Hub..."
+            sh "docker push $imageName:$version"
+
+            echo "Docker push completed."
+          }
         }
       }
     }
   }
-}
