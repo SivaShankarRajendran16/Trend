@@ -11,14 +11,22 @@ pipeline {
         sh 'docker build -t <username>/trend-app:latest .'
       }
     }
-    stage('Push Docker Image') {
-      steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-          sh 'echo $PASS | docker login -u $USER --password-stdin'
-          sh 'docker push <username>/trend-app:latest'
+    stage("Push to DockerHub") {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    echo "Logging in to Docker Hub..."
+                    sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
+                    
+                    echo "Pushing image to Docker Hub..."
+                    sh "docker push ${imageName}:${version}"
+                
+                }
+            }
         }
-      }
-    }
     stage('Deploy to Kubernetes') {
       steps {
         sh 'kubectl apply -f kubernetes/deployment.yaml'
