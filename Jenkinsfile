@@ -42,3 +42,13 @@ pipeline {
       }
     }
   }
+
+  post {
+    always {
+      echo "Pipeline execution completed."
+    }
+    failure {
+      echo "Build failed. Please check the logs."
+    }
+  }
+}
