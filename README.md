@@ -1,2 +1,2 @@
 # Trend
-This is my mini project
+This is my mini project in jenkins
