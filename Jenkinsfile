@@ -21,26 +21,6 @@ pipeline {
         }
       }
     }
-
-    stage('Push to DockerHub') {
-      steps {
-        withCredentials([usernamePassword(
-          credentialsId: 'dockerhub-credentials',
-          usernameVariable: 'DOCKER_USER',
-          passwordVariable: 'DOCKER_PASS'
-        )]) {
-          script {
-            echo "Logging in to Docker Hub..."
-            sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-
-            echo "Pushing image to Docker Hub..."
-            sh "docker push $imageName:$version"
-
-            echo "Docker push completed."
-          }
-        }
-      }
-    }
   }
 
   post {
