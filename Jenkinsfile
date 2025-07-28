@@ -1,14 +1,15 @@
 pipeline {
   agent any
   stages {
+    stages {
     stage('Clone') {
-      steps { git url: '<your-github-repo-url>' }
+      steps { git url: 'https://github.com/SivaShankarRajendran16/Trend.git' }
     }
     stage('Build & Dockerize') {
       steps {
         sh 'npm install'
         sh 'npm run build'
-        sh 'docker build -t <username>/trend-app:latest .'
+        sh 'docker build -t sivashankarrajendran/trend-app:latest .'
       }
     }
     stage("Push to DockerHub") {
