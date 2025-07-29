@@ -4,6 +4,8 @@ pipeline {
   environment {
     imageName = 'sivashankarrajendran/trend-app'
     version = 'latest'
+    AWS_REGION = 'ap-south-1'
+    CLUSTER_NAME = 'trend'
   }
 
   stages {
@@ -41,6 +43,26 @@ pipeline {
         }
       }
     }
+
+    stage('Deploy to EKS') {
+      steps {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          credentialsId: 'aws-creds'
+        ]]) {
+          script {
+            echo "Updating kubeconfig..."
+            sh "aws eks --region $AWS_REGION update-kubeconfig --name $CLUSTER_NAME"
+
+            echo "Deploying to EKS..."
+            sh '''
+              kubectl apply -f kubernetes/deployment.yaml
+              kubectl apply -f kubernetes/service.yaml
+            '''
+          }
+        }
+      }
+    }
   }
 
   post {
@@ -48,7 +70,7 @@ pipeline {
       echo "Pipeline execution completed."
     }
     failure {
-      echo "Build failed. Please check the logs."
+      echo "Build or deployment failed. Check logs."
     }
   }
 }
