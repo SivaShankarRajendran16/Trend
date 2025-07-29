@@ -31,9 +31,9 @@ Secure Mail Transfer Protocol over SSL/TLS. Used for sending emails securely via
 Custom TCP         TCP           30000-32767
 Kubernetes NodePort service range.
 
-===================
+===============
 Step 2: Tools Installation
-===================
+===============
 2.1.1 Connect to the Ingress Server
 vi Jenkins.sh ----> Paste the below content ---->
 
@@ -89,9 +89,9 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 
 docker --version
 
-==================================
+===================
 Step 3: Access Jenkins Dashboard
-==================================
+===================
 Setup the Jenkins
 
 3.1. Plugins installation
@@ -104,9 +104,9 @@ Configure AWS Credentials (Access and Secret Access Keys) as "aws-creds"
 
 3.3. Tools Configuration
 
-=====================================
+====================
 Step 4: Creation of EKS Cluster
-=====================================
+===================
 4.1. Creation of IAM user (To create EKS Cluster, its not recommended to create using Root Account)
 
 4.2. Attach policies to the user
