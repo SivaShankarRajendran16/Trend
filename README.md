@@ -152,7 +152,7 @@ sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 
 4.7. Create EKS Cluster
-eksctl create cluster --name kastro-cluster --region us-east-1 --node-type t2.medium --zones us-east-1a,us-east-1b
+eksctl create cluster --name trend --region us-east-1 --node-type t2.medium --zones us-east-1a,us-east-1b
 
 4.8. Modifying the permissions
 sudo usermod -aG docker jenkins
