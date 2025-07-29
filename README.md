@@ -159,6 +159,7 @@ sudo usermod -aG docker jenkins
 sudo systemctl restart docker
 sudo systemctl restart jenkins
 
+==================== Step 5: jenkins files config
 5. CI/CD with Jenkins
 Jenkins is configured with GitHub Webhook.
 Jenkins Pipeline pulls code from GitHub, builds Docker image, pushes to ECR, and deploys to EKS using kubectl.
@@ -167,7 +168,7 @@ Jenkinsfile Sample (placed in web-branch)
     Uses dockerhub-creds for image push
     Uses aws-creds to authenticate with EKS cluster
 
-📊 6. Monitoring Setup
+==================== Step 6: Monitoring Setup
 Prometheus & Grafana
 Installed Prometheus and Grafana on cluster
 Connected to EKS using Kubernetes service discovery
