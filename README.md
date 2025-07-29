@@ -1,4 +1,4 @@
-🧠 Brain Tasks App Deployment (React JS + Jenkins + AWS EKS + Monitoring)
+🧠 Trend App Deployment (React JS + Jenkins + AWS EKS + Monitoring)
 This project demonstrates the CI/CD deployment of a React JS application using Jenkins, Docker, and Kubernetes (EKS), with monitoring integrated via Prometheus and Grafana.
 
 1.1 git clone the repo
