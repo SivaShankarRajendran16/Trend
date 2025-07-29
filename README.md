@@ -3,7 +3,7 @@ This project demonstrates the CI/CD deployment of a React JS application using J
 
 1.1 git clone the repo
 
-1.2. Launch 1 VM (Ubuntu, 24.04, t2.large, 28 GB, Name: Ingress-Server)
+1.2. Launch 1 VM (Ubuntu, 24.04, t2.small, 28 GB, Name: Jenkins-Server)
 
 Open below ports for the Security Group attached to the above VM
 Type                  Protocol   Port range
